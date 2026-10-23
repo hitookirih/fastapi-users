@@ -11,6 +11,7 @@ def main():
             port=settings.gunicorn.port,
             workers=settings.gunicorn.workers,
             timeout=settings.gunicorn.timeout,
+            log_level=settings.logging.log_level,
         ),
     )
     app.run()
