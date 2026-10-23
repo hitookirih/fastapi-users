@@ -1,3 +1,5 @@
+__all__ = ("main",)
+
 from core.config import settings
 from core.gunicorn import Application, get_app_options
 from main import main_app
