@@ -8,7 +8,10 @@ from core.config import settings
 from api import router as api_router
 from core.models import db_helper
 
-logging.basicConfig(format=settings.logging.log_format)
+logging.basicConfig(
+    level=settings.logging.log_level_value,
+    format=settings.logging.log_format,
+)
 
 
 @asynccontextmanager
