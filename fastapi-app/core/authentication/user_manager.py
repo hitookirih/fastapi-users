@@ -7,6 +7,7 @@ from fastapi_users import BaseUserManager, IntegerIDMixin
 from core.models import User
 from core.config import settings
 from core.types.user_id import UserIdType
+from utils.webhooks.user import send_new_user_notification
 
 if TYPE_CHECKING:
     from fastapi import Request
@@ -27,6 +28,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIdType]):
             "User %r has registered.",
             user.id,
         )
+        await send_new_user_notification(user)
 
     async def on_after_request_verify(
         self,
