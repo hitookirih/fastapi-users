@@ -7,6 +7,7 @@ from fastapi.openapi.docs import (
     get_swagger_ui_oauth2_redirect_html,
 )
 
+from api.webhooks import webhooks_router
 from core.models import db_helper
 
 
@@ -49,6 +50,7 @@ def create_app(
         lifespan=lifespan,
         docs_url=None if create_custom_static_urls else "/docs",
         redoc_url=None if create_custom_static_urls else "/redoc",
+        webhooks=webhooks_router,
     )
     if create_custom_static_urls:
         register_static_docs_routes(app)
