@@ -25,8 +25,11 @@ class RequestsCountMiddlewareDispatch:
         call_next: CallNext,
     ) -> Response:
         path = request.url.path
-        self.counts[path].count += 1
-        response = await call_next(request)
+        try:
+            response = await call_next(request)
+        except Exception:
+            self.counts[path].statuses_counts[999] += 1
+            raise
         self.counts[path].statuses_counts[response.status_code] += 1
         return response
 
