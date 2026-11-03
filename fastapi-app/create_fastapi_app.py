@@ -12,6 +12,8 @@ from core.models import db_helper
 
 from errors_handlers import register_errors_handlers
 
+from middlewares import register_middlewares
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -58,4 +60,5 @@ def create_app(
         register_static_docs_routes(app)
 
     register_errors_handlers(app)
+    register_middlewares(app)
     return app
