@@ -17,7 +17,7 @@ class PathCounts:
 
 class RequestsCountMiddlewareDispatch:
     def __init__(self):
-        self.counts: defaultdict[str, PathCounts](PathCounts)
+        self.counts = defaultdict[str, PathCounts](PathCounts)
 
     async def __call__(
         self,
@@ -29,3 +29,6 @@ class RequestsCountMiddlewareDispatch:
         response = await call_next(request)
         self.counts[path].statuses_counts[response.status_code] += 1
         return response
+
+
+requests_count_middleware_dispatch = RequestsCountMiddlewareDispatch()
