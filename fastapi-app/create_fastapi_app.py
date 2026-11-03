@@ -12,7 +12,7 @@ from core.models import db_helper
 
 from errors_handlers import register_errors_handlers
 
-from middlewares import register_middlewares
+from middlewares.middlewares import register_middlewares
 
 
 @asynccontextmanager

@@ -4,7 +4,9 @@ from typing import Callable, Awaitable
 
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.middleware.base import BaseHTTPMiddleware
+
+from .request_count_middleware import RequestsCountMiddlewareDispatch
 
 log = logging.getLogger(__name__)
 
@@ -68,4 +70,8 @@ def register_middlewares(app: FastAPI) -> None:
     app.add_middleware(
         ProcessTimeHeaderMiddleware,
         process_time_header_name="X-Process-Time-New",
+    )
+
+    app.add_middleware(
+        RequestsCountMiddlewareDispatch,
     )
