@@ -36,6 +36,12 @@ class LoggingConfig(BaseModel):
         return logging.getLevelNamesMapping()[self.log_level.upper()]
 
 
+class SendEmailConfig(BaseModel):
+    admin_email: str = "admin@site.com"
+    hostname: str = "127.0.0.1"
+    port: int = 1025
+
+
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     auth: str = "/auth"
@@ -96,6 +102,7 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
     access_token: AccessToken
+    email_config: SendEmailConfig = SendEmailConfig()
 
 
 settings = Settings()
